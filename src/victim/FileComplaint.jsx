@@ -31,6 +31,7 @@ function FileComplaint() {
         victimEmail: user?.email || "",
       });
     } catch (error) {
+      console.log(error);
       setMessage("Failed to file complaint");
     }
   };

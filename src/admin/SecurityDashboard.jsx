@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import "../styles/dashboard.css";
 
 function SecurityDashboard() {
+  const navigate = useNavigate();
   const securityMetrics = [
     { label: "Data Encryption", status: "Active", color: "resolved" },
     { label: "SSL Certificate", status: "Valid", color: "resolved" },
@@ -28,7 +30,12 @@ function SecurityDashboard() {
 
         <div className="stats-row">
            {securityMetrics.map(m => (
-             <div key={m.label} className={`stat-card stat-${m.label === 'Data Encryption' ? 'one' : m.label === 'SSL Certificate' ? 'two' : 'three'}`} style={{ opacity: 0.9 }}>
+             <div 
+                key={m.label} 
+                className={`stat-card stat-${m.label === 'Data Encryption' ? 'one' : m.label === 'SSL Certificate' ? 'two' : 'three'}`} 
+                style={{ opacity: 0.9, cursor: "pointer" }}
+                onClick={() => navigate(`/admin/security/${m.label.toLowerCase().replace(/\s+/g, '-')}`)}
+             >
                 <h3>{m.label}</h3>
                 <p>{m.status}</p>
              </div>
@@ -39,8 +46,20 @@ function SecurityDashboard() {
            <div className="info-card">
               <h3>Real-time Access Logs</h3>
               <div style={{ marginTop: "15px" }}>
-                 {accessLogs.map((log, i) => (
-                   <div key={i} style={{ padding: "12px 0", borderBottom: i < accessLogs.length - 1 ? "1px solid #eef2ff" : "none", display: "flex", justifyContent: "space-between" }}>
+                  {accessLogs.map((log, i) => (
+                   <div 
+                     key={i} 
+                     className="clickable-card"
+                     style={{ 
+                       padding: "12px", 
+                       borderBottom: i < accessLogs.length - 1 ? "1px solid #eef2ff" : "none", 
+                       display: "flex", 
+                       justifyContent: "space-between",
+                       borderRadius: "8px",
+                       cursor: "pointer"
+                     }}
+                     onClick={() => navigate(`/admin/security/logs/${i}`)}
+                   >
                       <div>
                          <div style={{ fontWeight: "700", color: "#1e1b4b" }}>{log.action}</div>
                          <div style={{ fontSize: "12px", color: "#64748b" }}>{log.time}</div>

@@ -9,18 +9,19 @@ function CounsellorAppointments() {
   const [selectedId, setSelectedId] = useState(null);
   const user = JSON.parse(localStorage.getItem("user"));
 
-  useEffect(() => {
-    fetchAppointments();
-  }, []);
-
   const fetchAppointments = async () => {
     try {
       const res = await api.get("/appointments/type/COUNSELLOR");
       setAppointments(res.data);
     } catch (error) {
-      console.log("Error fetching counsellor appointments");
+      console.log("Error fetching counsellor appointments", error);
     }
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchAppointments();
+  }, []);
 
   const handleAddNote = async (id) => {
     try {
@@ -29,6 +30,7 @@ function CounsellorAppointments() {
       setNote("");
       setSelectedId(null);
     } catch (err) {
+      console.log(err);
       alert("Failed to save note");
     }
   };

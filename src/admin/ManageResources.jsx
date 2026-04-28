@@ -10,14 +10,15 @@ function ManageResources() {
   const [form, setForm] = useState({ category: "LEGAL", title: "", content: "" });
   const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    fetchResources();
-  }, []);
-
   const fetchResources = async () => {
     const res = await api.get("/resources");
     setResources(res.data);
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchResources();
+  }, []);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -27,6 +28,7 @@ function ManageResources() {
       setForm({ category: "LEGAL", title: "", content: "" });
       fetchResources();
     } catch (err) {
+      console.log(err);
       setMessage("Failed to update resource");
     }
   };

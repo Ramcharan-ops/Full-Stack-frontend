@@ -8,18 +8,19 @@ function TrackComplaints() {
   const user = JSON.parse(localStorage.getItem("user"));
   const [complaints, setComplaints] = useState([]);
 
-  useEffect(() => {
-    fetchComplaints();
-  }, []);
-
   const fetchComplaints = async () => {
     try {
       const res = await api.get(`/complaints/user/${user.email}`);
       setComplaints(res.data);
     } catch (error) {
-      console.log("Error fetching complaints");
+      console.log("Error fetching complaints", error);
     }
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchComplaints();
+  }, []);
 
   return (
     <div className="dashboard-page">

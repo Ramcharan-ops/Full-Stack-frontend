@@ -25,4 +25,10 @@ public class AdminController {
         // Mock security data to match frontend SecurityDashboard
         return ResponseEntity.ok("{\"status\": \"HEALTHY\", \"encryption\": \"AES-256\", \"ssl\": \"VALID\"}");
     }
+
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+        userRepository.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
 }

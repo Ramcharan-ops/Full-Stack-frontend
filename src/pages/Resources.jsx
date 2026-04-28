@@ -15,7 +15,7 @@ function Resources() {
         const res = await api.get("/resources");
         setResources(res.data);
       } catch (err) {
-        console.error("Error fetching resources");
+        console.error("Error fetching resources", err);
       } finally {
         setLoading(false);
       }

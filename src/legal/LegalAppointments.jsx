@@ -7,18 +7,19 @@ function LegalAppointments() {
   const [appointments, setAppointments] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
 
-  useEffect(() => {
-    fetchAppointments();
-  }, []);
-
   const fetchAppointments = async () => {
     try {
       const res = await api.get("/appointments/type/LEGAL_ADVISOR");
       setAppointments(res.data);
     } catch (error) {
-      console.log("Error fetching legal appointments");
+      console.log("Error fetching legal appointments", error);
     }
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchAppointments();
+  }, []);
 
   return (
     <div className="dashboard-page">

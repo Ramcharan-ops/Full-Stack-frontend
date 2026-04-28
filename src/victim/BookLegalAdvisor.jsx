@@ -35,6 +35,7 @@ function BookLegalAdvisor() {
         issueSummary: "",
       });
     } catch (error) {
+      console.log(error);
       setMessage("Failed to book legal advisor session");
     }
   };

@@ -32,6 +32,7 @@ function Login() {
       else if (user.role === "COUNSELLOR") navigate("/counsellor");
       else if (user.role === "LEGAL_ADVISOR") navigate("/legal");
     } catch (error) {
+      console.log(error);
       setMessage("Invalid email or password");
     }
   };

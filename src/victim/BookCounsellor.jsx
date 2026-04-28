@@ -35,6 +35,7 @@ function BookCounsellor() {
         issueSummary: "",
       });
     } catch (error) {
+      console.log(error);
       setMessage("Failed to book counsellor session");
     }
   };

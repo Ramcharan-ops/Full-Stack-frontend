@@ -6,25 +6,26 @@ import "../styles/dashboard.css";
 function ManageComplaints() {
   const [complaints, setComplaints] = useState([]);
 
-  useEffect(() => {
-    fetchComplaints();
-  }, []);
-
   const fetchComplaints = async () => {
     try {
-      const res = await api.get("/complaints/all");
+      const res = await api.get("/admin/complaints");
       setComplaints(res.data);
     } catch (error) {
-      console.log("Error fetching complaints");
+      console.log("Error fetching complaints", error);
     }
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchComplaints();
+  }, []);
 
   const handleStatusChange = async (id, newStatus) => {
     try {
       await api.put(`/complaints/${id}/status`, { status: newStatus });
       fetchComplaints();
     } catch (error) {
-      console.log("Error updating status");
+      console.log("Error updating status", error);
     }
   };
 

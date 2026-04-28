@@ -6,6 +6,8 @@ import AdminDashboard from "./admin/AdminDashboard";
 import AdminUsers from "./admin/AdminUsers";
 import ManageResources from "./admin/ManageResources";
 import SecurityDashboard from "./admin/SecurityDashboard";
+import SecurityDetail from "./admin/SecurityDetail";
+import SecurityLogDetail from "./admin/SecurityLogDetail";
 import VictimDashboard from "./victim/VictimDashboard";
 import CounsellorDashboard from "./counsellor/CounsellorDashboard";
 import LegalAdvisorDashboard from "./legal/LegalAdvisorDashboard";
@@ -35,6 +37,8 @@ function App() {
         <Route path="/admin/complaints" element={<ProtectedRoute allowedRole="ADMIN"><ManageComplaints /></ProtectedRoute>} />
         <Route path="/admin/resources" element={<ProtectedRoute><ManageResources /></ProtectedRoute>} />
         <Route path="/admin/security" element={<ProtectedRoute allowedRole="ADMIN"><SecurityDashboard /></ProtectedRoute>} />
+        <Route path="/admin/security/logs/:id" element={<ProtectedRoute allowedRole="ADMIN"><SecurityLogDetail /></ProtectedRoute>} />
+        <Route path="/admin/security/:metric" element={<ProtectedRoute allowedRole="ADMIN"><SecurityDetail /></ProtectedRoute>} />
 
         {/* --- VICTIM --- */}
         <Route path="/victim" element={<ProtectedRoute allowedRole="VICTIM"><VictimDashboard /></ProtectedRoute>} />
